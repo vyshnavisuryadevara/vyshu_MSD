@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Girls' Accessories</title>
   <style>
     body {
@@ -10,6 +10,7 @@
       font-family: 'Segoe UI', sans-serif;
       background: #fffafc;
       color: #333;
+      scroll-behavior: smooth;
     }
     header {
       background: #ff69b4;
@@ -19,24 +20,121 @@
       font-size: 2em;
       font-weight: bold;
       letter-spacing: 1px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    nav {
+      background: #ff4c8b;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0;
+      font-weight: 600;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffecf3;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(255,105,180,0.6), rgba(255,105,180,0.6)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+    .hero p {
+      font-size: 1.3em;
+      max-width: 600px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    .hero button {
+      background: #ff1493;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255,20,147,0.6);
+      transition: background 0.3s ease;
+    }
+    .hero button:hover {
+      background: #ff69b4;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      padding: 40px;
+      padding: 40px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .item {
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+      animation-fill-mode: forwards;
+      animation-duration: 0.6s;
+      animation-timing-function: ease-out;
+    }
+    .item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .item:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+    .item:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+    .item:nth-child(4) {
+      animation-delay: 0.7s;
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .item.animate {
+      animation-name: fadeUp;
+    }
+
+    .item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(255,20,147,0.3);
     }
     .item img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .item:hover img {
+      transform: scale(1.05);
     }
     .item h3 {
       margin: 10px;
@@ -47,45 +145,144 @@
       margin: 0 10px 10px;
       font-size: 0.95em;
     }
+
+    /* Newsletter */
+    .newsletter {
+      background: #ff69b4;
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+      margin-top: -20px;
+    }
+    .newsletter h2 {
+      margin-bottom: 15px;
+      font-size: 2em;
+    }
+    .newsletter p {
+      margin-bottom: 25px;
+      font-size: 1.1em;
+    }
+    .newsletter input[type="email"] {
+      padding: 12px 15px;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px 0 0 25px;
+      width: 250px;
+      max-width: 80vw;
+      outline: none;
+    }
+    .newsletter button {
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 0 25px 25px 0;
+      background: #ff1493;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .newsletter button:hover {
+      background: #ff3ca6;
+    }
+
     footer {
       background: #ffe4e1;
       text-align: center;
-      padding: 15px;
+      padding: 15px 20px;
       color: #444;
       font-size: 0.9em;
+      position: relative;
+    }
+    .social-icons {
+      margin-top: 8px;
+    }
+    .social-icons a {
+      margin: 0 8px;
+      color: #ff1493;
+      text-decoration: none;
+      font-size: 1.3em;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #ff69b4;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.2em;
+      }
+      .hero p {
+        font-size: 1em;
+      }
+      nav {
+        font-size: 0.9em;
+        gap: 12px;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>✨ Girls' Accessories Collection ✨</header>
+  <nav>
+    <a href="#gallery">Shop</a>
+    <a href="#newsletter">Subscribe</a>
+    <a href="#footer">Contact</a>
+  </nav>
 
-  <section class="gallery">
+  <section class="hero">
+    <h1>Welcome to AmmuThings Boutique</h1>
+    <p>Discover the cutest accessories that add sparkle to your everyday style.</p>
+    <button onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+  </section>
+
+  <section id="gallery" class="gallery">
     <div class="item">
-      <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7a-ANeQBDAcvHyAyi8HY9Hl3pPOCLNxJQBfjCH1QDZziIYlVnFgkbYIZ1EjUcI9IgJkuu6YQknw3CqjOMtWVpKerexupy5qf-4iQ4srMM" alt="Hair Clip">
+      <img src="https://m.media-amazon.com/images/I/71L44w5dnLL.jpg" alt="Hair Clip" />
       <h3>Floral Hair Clips</h3>
       <p>Colorful, lightweight clips perfect for every outfit.</p>
     </div>
     <div class="item">
-      <img src="https://www.zupppy.com/wp-content/uploads/2021/10/Mini-Hand-Bag-2.webp" alt="Handbag">
+      <img src="https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/17174636/2023/1/27/ce3ebd56-67ff-4254-9fb6-3450a6c1f1cd1674803736466-Accessorize-Pink-PU-Structured-Sling-Bag-8661674803735858-1.jpg" alt="Handbag" />
       <h3>Mini Handbags</h3>
       <p>Trendy pastel mini bags for outings and casual wear.</p>
     </div>
     <div class="item">
-      <img src="https://jewelbox.co.in/wp-content/uploads/2021/08/WBR0160-1.jpg" alt="Bracelets">
+      <img src="https://jewelbox.co.in/wp-content/uploads/2021/08/WBR0160-1.jpg" alt="Bracelets" />
       <h3>Charm Bracelets</h3>
       <p>Cute charm bracelets for daily wear or special events.</p>
     </div>
     <div class="item">
-      <img src="https://ishhaara.com/cdn/shop/files/ishhaara-rose-gold-ad-long-3-layered-necklace-31123003768875.png?v=1716317187" alt="Necklace">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20230929/Wb9s/6516273bddf77915190dc311/-473Wx593H-466647306-gold-MODEL.jpg" alt="Necklace" />
       <h3>Layered Necklaces</h3>
       <p>Elegant gold-toned necklaces for a glamorous look.</p>
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 AmmuThings Boutique | Follow us on Instagram @Ammuthings.shop
+  <section id="newsletter" class="newsletter">
+    <h2>Stay Updated!</h2>
+    <p>Subscribe to our newsletter for the latest collections and offers.</p>
+    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!'); this.reset();">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <footer id="footer">
+    &copy; 2025 AmmuThings Boutique | Follow us on Instagram
+    <div class="social-icons">
+      <a href="https://instagram.com/Ammuthings.shop" target="_blank" aria-label="Instagram" rel="noopener noreferrer">📸</a>
+      <a href="https://facebook.com/Ammuthings.shop" target="_blank" aria-label="Facebook" rel="noopener noreferrer">👍</a>
+      <a href="https://twitter.com/Ammuthings_shop" target="_blank" aria-label="Twitter" rel="noopener noreferrer">🐦</a>
+    </div>
   </footer>
+
+  <script>
+       document.querySelectorAll('.item').forEach(item => {
+      item.classList.add('animate');
+    });
+  </script>
 
 </body>
 </html>
