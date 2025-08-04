@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compact Keyboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      background: #1a1a1a;
+      color: white;
+      font-family: sans-serif;
+    }
+    #keyboard {
+      display: grid;
+      grid-template-columns: repeat(14, 1fr);
+      grid-auto-rows: 50px;
+      gap: 10px;
+      width: 90%;
+      margin: auto;
+    }
+    #keyboard div {
+      background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+    #keyboard .wide {
+      grid-column: span 2;
+    }
+    #keyboard .xwide {
+      grid-column: span 3;
+    }
+    #keyboard .space {
+      grid-column: 5 / span 6;
+    }
+  </style>
+</head>
+<body>
+  <div id="keyboard">
+    <div>Esc</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>0</div><div>-</div><div>=</div><div>⌫</div>
+
+    <div class="wide">Tab</div><div>Q</div><div>W</div><div>E</div><div>R</div><div>T</div><div>Y</div><div>U</div><div>I</div><div>O</div><div>P</div><div>[</div><div>]</div><div>\</div>
+
+    <div class="wide">Caps</div><div>A</div><div>S</div><div>D</div><div>F</div><div>G</div><div>H</div><div>J</div><div>K</div><div>L</div><div>;</div><div>'</div><div class="xwide">Enter</div>
+
+    <div class="xwide">Shift</div><div>Z</div><div>X</div><div>C</div><div>V</div><div>B</div><div>N</div><div>M</div><div>,</div><div>.</div><div>/</div><div class="xwide">Shift</div>
+
+    <div>🎤</div><div>Ctrl</div><div>Alt</div><div>🌐</div><div class="space">Space</div><div>🌐</div><div>Fn</div><div>⌘</div><div>⚙️</div><div>⬅️</div><div>⬇️</div><div>⬆️</div><div>➡️</div>
+  </div>
+</body>
+</html>
