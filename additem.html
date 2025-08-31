@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 8px;
+      width: 200px;
+    }
+    button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    ul {
+      margin-top: 20px;
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 8px;
+      margin-bottom: 5px;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+    }
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 5px 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Task List</h2>
+  <input type="text" id="itemInput" placeholder="Enter a task">
+  <button onclick="addItem()">Add Item</button>
+
+  <ul id="itemList"></ul>
+
+  <script>
+    function addItem() {
+      const input = document.getElementById("itemInput");
+      const itemText = input.value.trim();
+
+      if (itemText === "") {
+        alert("Please enter some text");
+        return;
+      }
+
+      
+      const li = document.createElement("li");
+      li.textContent = itemText;
+
+            const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.onclick = function () {
+        li.remove();
+      };
+
+            li.appendChild(deleteBtn);
+
+            document.getElementById("itemList").appendChild(li);
+
+           input.value = "";
+    }
+  </script>
+
+</body>
+</html>
